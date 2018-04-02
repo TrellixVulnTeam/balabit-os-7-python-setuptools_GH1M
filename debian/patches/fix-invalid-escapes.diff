@@ -1,0 +1,58 @@
+--- a/pkg_resources/_vendor/pyparsing.py
++++ b/pkg_resources/_vendor/pyparsing.py
+@@ -144,7 +144,7 @@
+         except UnicodeEncodeError:
+             # Else encode it
+             ret = unicode(obj).encode(sys.getdefaultencoding(), 'xmlcharrefreplace')
+-            xmlcharref = Regex('&#\d+;')
++            xmlcharref = Regex(r'&#\d+;')
+             xmlcharref.setParseAction(lambda t: '\\u' + hex(int(t[0][2:-1]))[2:])
+             return xmlcharref.transformString(ret)
+ 
+@@ -809,7 +809,7 @@
+         return None
+ 
+     def getName(self):
+-        """
++        r"""
+         Returns the results name for this token expression. Useful when several 
+         different expressions might match at a particular location.
+ 
+@@ -2722,7 +2722,7 @@
+ 
+ 
+ class Regex(Token):
+-    """
++    r"""
+     Token for matching strings that match a given regular expression.
+     Defined with string specifying the regular expression in a form recognized by the inbuilt Python re module.
+     If the given regex contains named groups (defined using C{(?P<name>...)}), these will be preserved as 
+@@ -2911,7 +2911,7 @@
+ 
+                 # replace escaped characters
+                 if self.escChar:
+-                    ret = re.sub(self.escCharReplacePattern,"\g<1>",ret)
++                    ret = re.sub(self.escCharReplacePattern,r"\g<1>",ret)
+ 
+                 # replace escaped quotes
+                 if self.escQuote:
+--- a/pkg_resources/_vendor/appdirs.py
++++ b/pkg_resources/_vendor/appdirs.py
+@@ -98,7 +98,7 @@
+ 
+ 
+ def site_data_dir(appname=None, appauthor=None, version=None, multipath=False):
+-    """Return full path to the user-shared data dir for this application.
++    r"""Return full path to the user-shared data dir for this application.
+ 
+         "appname" is the name of application.
+             If None, just the system directory is returned.
+@@ -204,7 +204,7 @@
+ 
+ 
+ def site_config_dir(appname=None, appauthor=None, version=None, multipath=False):
+-    """Return full path to the user-shared data dir for this application.
++    r"""Return full path to the user-shared data dir for this application.
+ 
+         "appname" is the name of application.
+             If None, just the system directory is returned.
